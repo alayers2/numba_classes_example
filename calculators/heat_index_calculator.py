@@ -5,7 +5,7 @@ import numpy as np
 
 class HeatIndexCalculator(object):
     """
-    This is the base implementation of the heat index calculation. Given two input arrays of temp and rh, we iterate
+    This is the baseline implementation of the heat index calculation. Given two input arrays of temp and rh, we iterate
     over them and apply the heat index calculation to each element.
     """
 
