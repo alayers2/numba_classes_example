@@ -12,22 +12,23 @@ class NumpyHeatIndexCalculator(object):
         heat_index = self._calculate_simple_heat_index(temp, rh)
 
         # Use np.where to calculate the full regression when temp is over 80 degrees.
+        full_regression = heat_index > 80.0
         heat_index = np.where(
-            heat_index > 80.0,
+            full_regression,
             self._calculate_full_regression(temp, rh),
             heat_index
         )
 
         # Use np.where to apply the dry adjustment for elements where it applies.
         heat_index = np.where(
-            (rh < 0.13) & (temp > 80) & (temp < 112),
+            full_regression & (rh < 0.13) & (80 < temp) & (temp < 112),
             heat_index - self._calculate_dry_adjustment(temp, rh),
             heat_index
         )
 
         # And likewise for the humid adjustment.
         heat_index = np.where(
-            (rh > 0.85) & (80 < temp) & (temp < 87),
+            full_regression & (rh > 0.85) & (80 < temp) & (temp < 87),
             heat_index + self._calculate_humid_adjustment(temp, rh),
             heat_index
         )
@@ -47,7 +48,7 @@ class NumpyHeatIndexCalculator(object):
         Calculates an adjustment to heat index applicable when humidity is less than 13%
         and the temp is between 80 and 112
         """
-        return ((13 - rh) / 4.0) * np.sqrt((17 - abs(temp - 95.0)) / 17)
+        return ((13 - rh) / 4.0) * np.sqrt((17.0 - np.fabs(temp - 95.0)) / 17.0)
 
     def _calculate_humid_adjustment(self, temp: np.ndarray, rh: np.ndarray) -> np.ndarray:
         """

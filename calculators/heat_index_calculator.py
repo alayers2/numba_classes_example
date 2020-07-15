@@ -65,7 +65,7 @@ class HeatIndexCalculator(object):
         Calculates an adjustment to heat index applicable when humidity is less than 13%
         and the temp is between 80 and 112
         """
-        return ((13 - rh) / 4.0) * math.sqrt((17 - math.fabs(temp - 95.0)) / 17)
+        return ((13 - rh) / 4.0) * math.sqrt((17.0 - math.fabs(temp - 95.0)) / 17.0)
 
     def _calculate_humid_adjustment(self, temp: float, rh: float) -> float:
         """
