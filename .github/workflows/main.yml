@@ -39,7 +39,7 @@ jobs:
      
     - name: Run Code
       run: |
-        jupyter nbconvert --ExecutePreprocessor.timeout=600 --execute class_based_numba.ipynb
+        jupyter nbconvert --to script --ExecutePreprocessor.timeout=600 --execute class_based_numba.ipynb
         python -m pytest
 
     - uses: actions/upload-artifact@v2
