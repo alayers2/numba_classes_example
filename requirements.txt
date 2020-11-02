@@ -1,4 +1,4 @@
-numpy==1.19.2
+numpy==1.19.3
 numba==0.51.2
 jupyter==1.0.0
 tbb==2020.3.254
