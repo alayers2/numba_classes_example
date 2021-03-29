@@ -1,5 +1,5 @@
 numpy==1.19.4
 numba==0.51.2
 jupyter==1.0.0
-tbb==2020.3.254
+tbb==2021.2.0
 nbstripout==0.3.9
